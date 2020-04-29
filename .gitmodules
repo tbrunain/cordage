@@ -1,0 +1,3 @@
+[submodule "docs-generator/themes/docsy"]
+	path = docs-generator/themes/docsy
+	url = git@github.com:google/docsy.git
