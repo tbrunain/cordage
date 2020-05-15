@@ -25,10 +25,6 @@ private val ethAddress = Properties()
 
 fun Party.ethAddress(): String {
     if (ethAddress.isEmpty) {
-        val url = javaClass.classLoader.getResource("ethAddress.properties")
-        if (url != null) {
-            ethAddress.load(url.openStream())
-        }
         val root = System.getProperty("user.dir")
         val path = Paths.get("$root/cordapps/config/cross-chain-atomic-swap-cordapp-0.1.conf")
         if (Files.isReadable(path)) {
@@ -36,5 +32,5 @@ fun Party.ethAddress(): String {
         }
     }
 
-    return ethAddress.getProperty(this.name.toString(), "0x0")
+    return ethAddress.getProperty(this.name.organisation, "0x0")
 }
