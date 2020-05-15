@@ -47,7 +47,7 @@ class StartEventWatchFlow(private val searchId: Int) : FlowLogic<Unit>() {
     @Suspendable
     override fun call() {
 
-        progressTracker.currentStep = EventWatchFlow.Companion.READING_CONFIG
+        progressTracker.currentStep = READING_CONFIG
         val config = serviceHub.getAppContext().config
         val ETHEREUM_RPC_URL = config.getString("rpcUrl")
         val ETHEREUM_NETWORK_ID = config.getString("networkId")
