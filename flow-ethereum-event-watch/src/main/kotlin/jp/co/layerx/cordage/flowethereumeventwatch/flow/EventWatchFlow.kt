@@ -27,10 +27,6 @@ import java.math.BigInteger
 @InitiatingFlow
 @SchedulableFlow
 class EventWatchFlow(private val stateRef: StateRef) : FlowLogic<String>() {
-
-    lateinit var web3: Web3j
-    lateinit var credentials: Credentials
-
     companion object {
         // TODO Use Node Configuration https://github.com/LayerXcom/cordage/issues/20
         val eventMapping = mapOf<String, Event>("Set" to SimpleStorage.SET_EVENT)
@@ -64,8 +60,9 @@ class EventWatchFlow(private val stateRef: StateRef) : FlowLogic<String>() {
         val config = serviceHub.getAppContext().config
         val ETHEREUM_RPC_URL = config.getString("rpcUrl")
         val ETHEREUM_PRIVATE_KEY = config.getString("privateKey")
-        web3 = Web3j.build(HttpService(ETHEREUM_RPC_URL))
-        credentials = Credentials.create(ETHEREUM_PRIVATE_KEY)
+
+        val web3 = Web3j.build(HttpService(ETHEREUM_RPC_URL))
+        val credentials = Credentials.create(ETHEREUM_PRIVATE_KEY)
 
         progressTracker.currentStep = WATCHING_EVENT
         val input = serviceHub.toStateAndRef<WatcherState>(stateRef)
@@ -90,7 +87,7 @@ class EventWatchFlow(private val stateRef: StateRef) : FlowLogic<String>() {
                 val eventValues = abiTypes?.map { it.value as BigInteger }
                 val filteredEventValues = eventValues?.filter { e -> e == searchId }
                 if (filteredEventValues != null && filteredEventValues.isNotEmpty()) {
-                    doSomething(input.state.data)
+                    doSomething(input.state.data, web3, credentials)
                     return "Ethereum Event with id: $searchId watched and send TX Completed"
                 }
             }
@@ -120,7 +117,7 @@ class EventWatchFlow(private val stateRef: StateRef) : FlowLogic<String>() {
         return "Event Watched. (fromBlockNumber: ${fromBlockNumber}, toBlockNumber: ${toBlockNumber})"
     }
 
-    private fun doSomething(input: WatcherState) {
+    private fun doSomething(input: WatcherState, web3: Web3j, credentials: Credentials) {
         val simpleStorage: SimpleStorage = SimpleStorage.load(input.targetContractAddress, web3, credentials,
             StaticGasProvider(BigInteger.valueOf(1), BigInteger.valueOf(500000)))
         simpleStorage.set(input.searchId.inc()).send()
