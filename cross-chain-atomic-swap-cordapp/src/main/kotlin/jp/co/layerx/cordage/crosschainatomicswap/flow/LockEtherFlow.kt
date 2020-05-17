@@ -17,7 +17,7 @@ import java.math.BigInteger
 @StartableByRPC
 class LockEtherFlow(
     private val proposalState: ProposalState,
-    private val settlement: Settlement?
+    private val settlement: Settlement? = null
 ) : FlowLogic<String>() {
     companion object {
 

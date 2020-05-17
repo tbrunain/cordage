@@ -112,7 +112,7 @@ class ProposeAtomicSwapFlow(
         progressTracker.currentStep = EXECUTING_LOCKETHERFLOW
         val finalizedProposalState = finalizedTx.coreTransaction.outputsOfType<ProposalState>().first()
 
-        val txHash = subFlow(mockLockEtherFlow ?: LockEtherFlow(finalizedProposalState, null))
+        val txHash = subFlow(mockLockEtherFlow ?: LockEtherFlow(finalizedProposalState))
         return Pair(finalizedTx, txHash)
     }
 }
