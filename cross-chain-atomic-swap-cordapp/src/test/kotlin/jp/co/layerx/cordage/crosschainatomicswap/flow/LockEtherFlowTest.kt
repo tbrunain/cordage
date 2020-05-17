@@ -8,6 +8,7 @@ import jp.co.layerx.cordage.crosschainatomicswap.ALICE
 import jp.co.layerx.cordage.crosschainatomicswap.BOB
 import jp.co.layerx.cordage.crosschainatomicswap.CHARLIE
 import jp.co.layerx.cordage.crosschainatomicswap.ethWrapper.Settlement
+import jp.co.layerx.cordage.crosschainatomicswap.readConfig
 import jp.co.layerx.cordage.crosschainatomicswap.state.CorporateBond
 import jp.co.layerx.cordage.crosschainatomicswap.state.ProposalState
 import net.corda.core.contracts.UniqueIdentifier
@@ -32,9 +33,9 @@ class LockEtherFlowTest {
     fun setUp() {
 
         val customConfig: MutableMap<String, String> = LinkedHashMap()
-        customConfig["rpcUrl"] = "http://localhost:8545"
-        customConfig["networkId"] = "5777"
-        customConfig["privateKey"] = "0x6cbed15c793ce57650b9877cf6fa156fbef513c4e6134f022a85b1ffdd59b2a1"
+        customConfig["rpcUrl"] = readConfig("rpcUrl")
+        customConfig["networkId"] = readConfig("networkId")
+        customConfig["privateKey"] = readConfig("privateKey")
 
         network = MockNetwork(
             MockNetworkParameters()
