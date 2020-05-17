@@ -30,7 +30,7 @@ fun Party.ethAddress(): String {
             ethAddress.load(url.openStream())
         }
         val root = System.getProperty("user.dir")
-        val path = Paths.get("$root/cordapps/config/config.conf")
+        val path = Paths.get("$root/cordapps/config/cross-chain-atomic-swap-cordapp-0.1.conf")
         if (Files.isReadable(path)) {
             ethAddress.load(Files.newInputStream(path))
         }
