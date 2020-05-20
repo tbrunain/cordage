@@ -1,4 +1,4 @@
-# ![Cordage](./docs/images/cordage.png)
+# ![Cordage](https://layerxcom.github.io/cordage/images/cordage.png)
 
 - [English](./README.md)
 - [日本語](./README.ja.md)
@@ -7,7 +7,7 @@ Cordage makes the interoperability possible between [Corda](https://www.corda.ne
 by providing several modules that propagate, pull and verify information between Blockchains
 without further trusted third party.
 
-In the first stage, we focus on EVM based blockchain such as Ethereum and [Quorum](https://www.goquorum.com/).
+In the first stage, we focus on EVM based blockchain such as Ethereum, [Quorum](https://www.goquorum.com/) and [Hyperledger Besu](https://www.hyperledger.org/use/besu).
 
 WARNING: Cordage is alpha quality software, improvements and fixes are made frequently.
 
@@ -89,4 +89,4 @@ Cordage is licensed under [the Apache License, Version 2.0](./LICENSE).
 - [etaroid](https://github.com/etaroid)
 
 ## Sponsors
-<a href="https://layerx.co.jp/en/"><img src="./docs/images/layerx.png" alt="LayerX" width="500"></a><br />
+<a href="https://layerx.co.jp/en/"><img src="https://layerxcom.github.io/cordage/images/layerx.png" alt="LayerX" width="500"></a><br />
